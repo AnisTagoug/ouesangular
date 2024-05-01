@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudygService } from '../services/studyg.service';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-studyg',
   templateUrl: './studyg.component.html',
@@ -11,6 +13,7 @@ export class StudygComponent implements OnInit {
   constructor(
     private service : StudygService,
     private router : Router,
+    private toastr: ToastrService
   ) { }
   fournisseurs:any={}
 textBus = '';
@@ -68,7 +71,21 @@ modify(id:any){
           btn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
+    incrementNbp(id: number) {
+      this.service.incrementNbpIfUnderFive(id).subscribe(
+        (data) => {
+          // Handle the response if needed
+          console.log('Incremented nbp successfully', data);
+        },
+        (error) => {
+          // Handle error if necessary
+          console.error('Error while incrementing nbp', error);
 
+                this.toastr.error('Unable to increment nbp. Maximum participants reached.');
+
+        }
+      );
+    }
 }
 
 

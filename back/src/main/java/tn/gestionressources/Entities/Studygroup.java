@@ -18,8 +18,14 @@ public class Studygroup {
     @JsonFormat(pattern="yyyy-MM-dd")
     Date date_debut;
     String Topic;
+    @Enumerated(EnumType.STRING)
     Level level;
+    @Enumerated(EnumType.STRING)
+    Bloc bloc;
     String location;
+    int nbp;
+    @Enumerated(EnumType.STRING)
+    Status status = Status.Waiting;
     @ManyToMany(mappedBy = "Studygroups",cascade = CascadeType.ALL)
     private Set<Ressource> Ressources;
 }

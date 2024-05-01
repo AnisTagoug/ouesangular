@@ -14,6 +14,6 @@ public interface IStudygroupService {
     void deleteStudyGroup(long isStudygroup);
 
     Studygroup updateStudygroup(Long id,Studygroup studygroup);
-
+    public Studygroup incrementNbpIfUnderFive(long idStudyGroup);
 
 }

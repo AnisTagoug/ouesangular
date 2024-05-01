@@ -48,5 +48,13 @@ public class StudyGroupRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucune session trouvée avec l'ID : " + sid);
         }
     }
-
+    @PutMapping("/increment-nbp/{studygroup-id}")
+    public ResponseEntity<?> incrementNbpIfUnderFive(@PathVariable("studygroup-id") Long studygroupId) {
+        Studygroup updatedStudygroup = studygroupService.incrementNbpIfUnderFive(studygroupId);
+        if (updatedStudygroup != null) {
+            return ResponseEntity.ok(updatedStudygroup);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Studygroup not found or nbp cannot be incremented.");
+        }
+    }
 }

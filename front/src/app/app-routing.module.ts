@@ -12,6 +12,8 @@ import { UpdatematerielComponent } from './materiel/updatemateriel/updatematerie
 import { StudygComponent } from './studyg/studyg.component';
 import { AddStudygComponent } from './studyg/add-studyg/add-studyg.component';
 import { UpdateStudygComponent } from './studyg/update-studyg/update-studyg.component';
+import { OussamaComponent } from './oussama/oussama.component';
+import { AllTemplateFrontComponent } from './all-template-front/all-template-front.component';
 
 const routes: Routes = [
   {path: 'offre', component: OffreComponent},
@@ -26,7 +28,8 @@ const routes: Routes = [
   {path: 'studyg', component: StudygComponent},
   {path: 'addsg', component: AddStudygComponent},
   {path: 'updatesg/:id', component: UpdateStudygComponent},
-
+  {path: 'oues', component: OussamaComponent},
+  {path: 'waaa', component: AllTemplateFrontComponent},
 ];
 
 @NgModule({

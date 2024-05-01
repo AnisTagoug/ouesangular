@@ -52,4 +52,16 @@ public class StudygroupImpl implements IStudygroupService {
         }
 
     }
+    @Override
+    public Studygroup incrementNbpIfUnderFive(long idStudyGroup) {
+        Optional<Studygroup> optionalStudygroup = studygroupRepository.findById(idStudyGroup);
+        if (optionalStudygroup.isPresent()) {
+            Studygroup studygroup = optionalStudygroup.get();
+            if (studygroup.getNbp() < 5) {
+                studygroup.setNbp(studygroup.getNbp() + 1);
+                return studygroupRepository.save(studygroup);
+            }
+        }
+        return null; // or throw an exception if needed
+    }
 }

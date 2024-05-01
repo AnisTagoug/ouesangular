@@ -30,7 +30,7 @@ export class StudygService {
     return this.http.get('http://localhost:8089/Studygroup/retrieve-studygroup/'+id)
   }
 
-  assignMaterialToSession(idSession: number, pack: string): Observable<any> {
-    return this.http.post<any>(`http://localhost:8075/${idSession}/assign-material?pack=${pack}`, {});
+  incrementNbpIfUnderFive(id: number): Observable<any> {
+    return this.http.put<any>(`http://localhost:8089/Studygroup/increment-nbp/${id}`, {});
   }
 }
