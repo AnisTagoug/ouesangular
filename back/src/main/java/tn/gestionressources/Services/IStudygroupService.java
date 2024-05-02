@@ -15,5 +15,6 @@ public interface IStudygroupService {
 
     Studygroup updateStudygroup(Long id,Studygroup studygroup);
     public Studygroup incrementNbpIfUnderFive(long idStudyGroup);
-
+    public Studygroup createStudygroupWithLocal(Studygroup studygroup, long localId);
+    public List<String> getAllStudyNames();
 }

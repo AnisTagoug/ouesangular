@@ -57,4 +57,18 @@ public class StudyGroupRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Studygroup not found or nbp cannot be incremented.");
         }
     }
+    @PostMapping("/create-studygroup-with-local/{local-id}")
+    public ResponseEntity<?> createStudygroupWithLocal(@RequestBody Studygroup studygroup, @PathVariable("local-id") Long localId) {
+        Studygroup createdStudygroup = studygroupService.createStudygroupWithLocal(studygroup, localId);
+        if (createdStudygroup != null) {
+            return ResponseEntity.ok(createdStudygroup);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Local not found or studygroup could not be created with the given local ID.");
+        }
+    }
+    @GetMapping("/names")
+    public List<String> getAllLocalNames() {
+        List<String> localNames = studygroupService.getAllStudyNames();
+        return localNames;
+    }
 }

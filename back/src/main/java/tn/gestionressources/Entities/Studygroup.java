@@ -1,5 +1,6 @@
 package tn.gestionressources.Entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,4 +29,7 @@ public class Studygroup {
     Status status = Status.Waiting;
     @ManyToMany(mappedBy = "Studygroups",cascade = CascadeType.ALL)
     private Set<Ressource> Ressources;
+    @ManyToOne
+    @JoinColumn(name = "local_id_local")
+    private Local local;
 }

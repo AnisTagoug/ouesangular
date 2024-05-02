@@ -2,9 +2,12 @@ package tn.gestionressources.Services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.gestionressources.Entities.Local;
 import tn.gestionressources.Entities.Studygroup;
+import tn.gestionressources.Repository.LocalRepository;
 import tn.gestionressources.Repository.StudygroupRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +15,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class StudygroupImpl implements IStudygroupService {
     StudygroupRepository studygroupRepository;
-
+    LocalRepository localRepository;
 
     @Override
     public Studygroup addStudyGroup(Studygroup studygroup) {
@@ -63,5 +66,27 @@ public class StudygroupImpl implements IStudygroupService {
             }
         }
         return null; // or throw an exception if needed
+    }
+    @Override
+    public Studygroup createStudygroupWithLocal(Studygroup studygroup, long localId) {
+        Optional<Local> optionalLocal = localRepository.findById(localId);
+        if (optionalLocal.isPresent()) {
+            Local local = optionalLocal.get();
+            studygroup.setLocal(local);
+            local.getStudygroups().add(studygroup);
+            return studygroupRepository.save(studygroup);
+        } else {
+            // Handle the case where the Local with the given ID does not exist
+            return null;
+        }
+    }
+    @Override
+    public List<String> getAllStudyNames() {
+        List<Studygroup> locals = studygroupRepository.findAll();
+        List<String> localNames = new ArrayList<>();
+        for (Studygroup local : locals) {
+            localNames.add(local.getTopic());
+        }
+        return localNames;
     }
 }
